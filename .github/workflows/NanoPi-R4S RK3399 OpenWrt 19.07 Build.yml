@@ -81,7 +81,7 @@ jobs:
           svn co https://github.com/xiaorouji/openwrt-passwall/trunk/chinadns-ng
           svn co https://github.com/xiaorouji/openwrt-passwall/trunk/xray-core
           
-          svn co https://github.com/songchenwen/nanopi-r2s/trunk/luci-app-r2sflasher
+          # svn co https://github.com/songchenwen/nanopi-r2s/trunk/luci-app-r2sflasher
           
           svn co https://github.com/pymumu/smartdns/trunk/package/openwrt smartdns
           svn co https://github.com/pymumu/luci-app-smartdns/branches/lede luci-app-smartdns
@@ -153,7 +153,7 @@ jobs:
       - name: Custom Configure Files
         run: |
           rm -f code/friendlywrt/.config*
-          cp r2s-rk3399-config code/configs/config_rk3399
+          cp r4s-rk3399-config code/configs/config_rk3399
 
       - name: Set Default Values
         run: |
