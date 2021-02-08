@@ -185,7 +185,8 @@ jobs:
           rm -rf ./artifact/
           mkdir -p ./artifact/
 
-          find code/out/ -name "FriendlyWrt_*img*" | xargs -I{} sh -c 'f=$(basename $1); zip -r -j "./artifact/${f}.zip" $1' sh {} \;
+          #find code/out/ -name "FriendlyWrt_*img" | xargs -I{} sh -c 'f=$(basename $1); zip -r -j "./artifact/${f}.zip" $1' sh {} \;
+          cp code/out/*.img.zip ./artifact/
           cp code/friendlywrt/.config ./artifact/
 
       - name: Upload Artifact
