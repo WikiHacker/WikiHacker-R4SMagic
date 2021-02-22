@@ -153,6 +153,7 @@ jobs:
           rm -f index.htm
       
       - name: Copy File
+        run: |
           cd code/friendlywrt/package/lean/autocore/files/arm
           cp index.htm code/friendlywrt/feeds/luci/modules/luci-mod-admin-full/luasrc/view/admin_status/
           #
