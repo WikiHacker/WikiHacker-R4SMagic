@@ -147,10 +147,17 @@ jobs:
           
           sed -i '/done/imkfs.ext4 \/dev\/mmcblk0p2 && mkdir \/mnt\/mmcblk0p2 && mount \/dev\/mmcblk0p2 \/mnt\/mmcblk0p2 && mount \/dev\/mmcblk0p2 \/opt\n' ./friendlywrt/package/base-files/files/root/setup.sh
           # sed -i 's/\/root/\/mnt\/mmcblk0p2/g' ./friendlywrt/package/luci-app-r2sflasher/root/usr/bin/rom_flash
-      - name: Add YouTube
+      - name: Remove File
         run: |
+          cd code/friendlywrt/feeds/luci/modules/luci-mod-admin-full/luasrc/view/admin_status/
+          rm -f index.htm
+      
+      - name: Copy File
           cd code/friendlywrt/package/lean/autocore/files/arm
-          sed -i '/Load Average/i\\t\t<tr><td width="33%"><%:YouTube%></td><td><a href="#"><%=WikiHackers%></a></td></tr>' index.htm
+          cp index.htm code/friendlywrt/feeds/luci/modules/luci-mod-admin-full/luasrc/view/admin_status/
+          #
+          #cd code/friendlywrt/package/lean/autocore/files/arm
+          #sed -i '/Load Average/i\\t\t<tr><td width="33%"><%:YouTube%></td><td><a href="#"><%=WikiHackers%></a></td></tr>' index.htm
 
       - name: Patch Kernel
         run: |
