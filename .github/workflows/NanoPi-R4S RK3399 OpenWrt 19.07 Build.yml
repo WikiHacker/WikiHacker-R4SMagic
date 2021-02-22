@@ -154,8 +154,8 @@ jobs:
       
       - name: Copy File
         run: |
-          cd code/friendlywrt/package/lean/autocore/files/arm
-          cp index.htm code/friendlywrt/feeds/luci/modules/luci-mod-admin-full/luasrc/view/admin_status/
+          cp code/friendlywrt/package/lean/autocore/files/arm/index.htm code/friendlywrt/feeds/luci/modules/luci-mod-admin-full/luasrc/view/admin_status
+          #cp index.htm code/friendlywrt/feeds/luci/modules/luci-mod-admin-full/luasrc/view/admin_status/
           #
           #cd code/friendlywrt/package/lean/autocore/files/arm
           #sed -i '/Load Average/i\\t\t<tr><td width="33%"><%:YouTube%></td><td><a href="#"><%=WikiHackers%></a></td></tr>' index.htm
