@@ -5,3 +5,4 @@
 * added passwall
 * Fixing Upload # 1
 * Create Release
+* Fix Clash
