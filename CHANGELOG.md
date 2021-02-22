@@ -6,4 +6,4 @@
 * Fixing Upload # 1
 * Create Release
 * Fix Clash
-* Magic HTML Copy and Replace
+* Magic HTML Copy and Replaces
