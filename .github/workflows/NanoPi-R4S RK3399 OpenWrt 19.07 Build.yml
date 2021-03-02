@@ -152,14 +152,6 @@ jobs:
           cd code/friendlywrt/feeds/luci/modules/luci-mod-admin-full/luasrc/view/admin_status/
           rm -f index.htm
       
-      - name: Copy File
-        run: |
-          cp code/friendlywrt/package/lean/autocore/files/arm/index.htm code/friendlywrt/feeds/luci/modules/luci-mod-admin-full/luasrc/view/admin_status
-          #cp index.htm code/friendlywrt/feeds/luci/modules/luci-mod-admin-full/luasrc/view/admin_status/
-          #
-          #cd code/friendlywrt/package/lean/autocore/files/arm
-          #sed -i '/Load Average/i\\t\t<tr><td width="33%"><%:YouTube%></td><td><a href="#"><%=WikiHackers%></a></td></tr>' index.htm
-
       - name: MOD index file
         run: |
           cd code/friendlywrt/feeds/luci/modules/luci-mod-admin-full/luasrc/view/admin_status
@@ -221,7 +213,7 @@ jobs:
         with:
           name: FriendlyWrt_NanoPi-R4S RK3399 v19.07 $(date +%Y-%m-%d)
           allowUpdates: true
-          tag: 20210219
+          tag: 20210302
           commit: main
           replacesArtifacts: true
           token: ${{ secrets.GITHUB_TOKEN }}
