@@ -151,11 +151,7 @@ jobs:
           
           sed -i '/done/imkfs.ext4 \/dev\/mmcblk0p2 && mkdir \/mnt\/mmcblk0p2 && mount \/dev\/mmcblk0p2 \/mnt\/mmcblk0p2 && mount \/dev\/mmcblk0p2 \/opt\n' ./friendlywrt/package/base-files/files/root/setup.sh
           # sed -i 's/\/root/\/mnt\/mmcblk0p2/g' ./friendlywrt/package/luci-app-r2sflasher/root/usr/bin/rom_flash
-      - name: Remove File
-        run: |
-          cd code/friendlywrt/feeds/luci/modules/luci-mod-admin-full/luasrc/view/admin_status/
-          rm -f index.htm
-      
+     
       - name: MOD index file
         run: |
           cd code/friendlywrt/feeds/luci/modules/luci-mod-admin-full/luasrc/view/admin_status
