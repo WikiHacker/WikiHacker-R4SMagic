@@ -8,7 +8,6 @@ on:
   # watch:
   #   types: started
 
-
 jobs:
 
   build:
@@ -70,13 +69,13 @@ jobs:
           git clone https://github.com/jerrykuku/lua-maxminddb.git
           git clone https://github.com/jerrykuku/luci-app-vssr.git
           git clone --depth=1 -b master https://github.com/vernesong/OpenClash
-          cp -R OpenClash/luci-app-openclash luci-app-openclash
 
           rm -rf lean/luci-theme-argon
           git clone -b 18.06 https://github.com/jerrykuku/luci-theme-argon.git
 
           # svn co https://github.com/vernesong/OpenClash/trunk/luci-app-openclash
-          
+          # svn co https://github.com/vernesong/OpenClash/trunk/luci-app-openclash
+
           svn co https://github.com/xiaorouji/openwrt-passwall/trunk/luci-app-passwall
           svn co https://github.com/xiaorouji/openwrt-passwall/trunk/tcping
           svn co https://github.com/xiaorouji/openwrt-passwall/trunk/ssocks
@@ -100,7 +99,7 @@ jobs:
           cd code/friendlywrt/package/base-files/files
           mkdir -p etc/openclash/core
           # for updates, go to: https://github.com/Dreamacro/clash/releases
-          wget -qO- https://github.com/Dreamacro/clash/releases/download/v1.3.5/clash-linux-armv8-v1.3.5.gz | gunzip -c > etc/openclash/core/clash
+          wget -qO- https://github.com/Dreamacro/clash/releases/download/v1.4.1/clash-linux-armv8-v1.4.1.gz | gunzip -c > etc/openclash/core/clash
           # for updates, go to: https://github.com/vernesong/OpenClash/releases/tag/TUN-Premium
           wget -qO- https://github.com/vernesong/OpenClash/releases/download/TUN-Premium/clash-linux-armv8-2021.02.21.gz | gunzip -c > etc/openclash/core/clash_tun
           # for updates, go to: https://github.com/vernesong/OpenClash/releases/tag/TUN
@@ -143,17 +142,20 @@ jobs:
           wget -O friendlywrt/feeds/packages/libs/libxml2/Makefile https://raw.githubusercontent.com/coolsnowwolf/packages/master/libs/libxml2/Makefile
 
           sed -i "/redirect_https/d" friendlywrt/package/network/services/uhttpd/files/uhttpd.config
+          #sed -i '/Load Average/i\\t\t<tr><td width="33%"><%:YouTube%></td><td><%=WikiHackers%></td></tr>' friendlywrt/feeds/luci/modules/luci-mod-admin-full/luasrc/view/admin_status/index.htm
+          # sed -i '/Load Average/i\\t\t<tr><td width="33%"><%:CPU Temperature%></td><td><%=luci.sys.exec("cut -c1-2 /sys/class/thermal/thermal_zone0/temp")%><span>&#8451;</span></td></tr>' friendlywrt/feeds/luci/modules/luci-mod-admin-full/luasrc/view/admin_status/index.htm
+          # sed -i 's/pcdata(boardinfo.system or "?")/"ARMv8"/' friendlywrt/feeds/luci/modules/luci-mod-admin-full/luasrc/view/admin_status/index.htm
           sed -i 's/services/vpn/g' friendlywrt/package/feeds/luci/luci-app-openvpn/luasrc/controller/openvpn.lua
           sed -i 's/resolv.conf.d\/resolv.conf.auto/resolv.conf.auto/g' friendlywrt/package/lean/luci-app-flowoffload/root/etc/init.d/flowoffload
           
           sed -i '/done/imkfs.ext4 \/dev\/mmcblk0p2 && mkdir \/mnt\/mmcblk0p2 && mount \/dev\/mmcblk0p2 \/mnt\/mmcblk0p2 && mount \/dev\/mmcblk0p2 \/opt\n' ./friendlywrt/package/base-files/files/root/setup.sh
           # sed -i 's/\/root/\/mnt\/mmcblk0p2/g' ./friendlywrt/package/luci-app-r2sflasher/root/usr/bin/rom_flash
-     
       - name: MOD index file
         run: |
           cd code/friendlywrt/feeds/luci/modules/luci-mod-admin-full/luasrc/view/admin_status
-          sed -i '/Load Average/i\\t\t<tr><td width="33%"><%:YouTube%></td><td><a href="#"><%:WikiHackers%></a></td></tr>' index.htm
-
+          sed -i '/Load Average/i\\t\t<tr><td width="33%"><%:Telegram%></td><td><a href="https://t.me/wikimao"><%:WikiHackers%></a></td></tr>' index.htm
+          sed -i '/Load Average/i\\t\t<tr><td width="33%"><%:CPU Temperature%></td><td><%=luci.sys.exec("cut -c1-2 /sys/class/thermal/thermal_zone0/temp")%><span>&#8451;</span></td></tr>' index.htm
+          
       - name: Patch Kernel
         run: |
           cd code/kernel/
@@ -162,7 +164,7 @@ jobs:
       - name: Custom Configure Files
         run: |
           rm -f code/friendlywrt/.config*
-          cp r4s-rk3399-config code/configs/config_rk3399
+          cp config/r4s-rk3399-config code/configs/config_rk3399
 
       - name: Set Default Values
         run: |
@@ -208,9 +210,11 @@ jobs:
         id: create_release
         uses: ncipollo/release-action@v1.7.3
         with:
-          name: FriendlyWrt_NanoPi-R4S RK3399 v19.07 $(date +%Y-%m-%d)
+          name: FriendlyWrt_NanoPi-R4S RK3399 v19.07
           allowUpdates: true
-          tag: 20210302
+          tag: ${{ env.NOW }}
+        env:
+          NOW: $(date +'%Y-%m-%dT%H:%M:%S')
           commit: main
           replacesArtifacts: true
           token: ${{ secrets.GITHUB_TOKEN }}
