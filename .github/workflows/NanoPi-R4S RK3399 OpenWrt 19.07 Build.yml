@@ -12,7 +12,7 @@ jobs:
 
   build:
 
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
 
     steps:
 
@@ -88,8 +88,8 @@ jobs:
           
           # svn co https://github.com/songchenwen/nanopi-r2s/trunk/luci-app-r2sflasher
           
-          svn co https://github.com/pymumu/smartdns/trunk/package/openwrt smartdns
-          svn co https://github.com/pymumu/luci-app-smartdns/branches/lede luci-app-smartdns
+          # svn co https://github.com/pymumu/smartdns/trunk/package/openwrt smartdns
+          # svn co https://github.com/pymumu/luci-app-smartdns/branches/lede luci-app-smartdns
           svn co https://github.com/lisaac/luci-app-dockerman/trunk/applications/luci-app-dockerman
 
           git clone https://github.com/jerrykuku/luci-app-jd-dailybonus.git
@@ -219,7 +219,7 @@ jobs:
         with:
           name: FriendlyWrt_NanoPi-R4S RK3399 v19.07
           allowUpdates: true
-          tag: R4S20210321
+          tag: R4S20210401
           commit: main
           replacesArtifacts: true
           token: ${{ secrets.GITHUB_TOKEN }}
